@@ -56,8 +56,11 @@ public class GameOfWar {
     private void playHand()
     {
         Card p1Card = p1Hand.remove(0);
-        Card p2Card = p1Hand.remove(0);
+        Card p2Card = p2Hand.remove(0);
         
+        System.out.printf("player 1 %s cards in hand: %d", p1Card,p1Hand.size()+1);
+        System.out.printf("\tplayer 2 %s cards in hand: %d%n", p2Card,p2Hand.size()+1);        
+                
         if (p1Card.getFaceValue()>p2Card.getFaceValue())
         {
             p1Hand.add(p1Card);
@@ -86,7 +89,7 @@ public class GameOfWar {
             p2Hand.addAll(p1Hand);
             p1Hand.clear();
             p2Hand.addAll(warPile);
-            
+            return;
         }
         
          if (p2Hand.size()<3)
@@ -94,7 +97,7 @@ public class GameOfWar {
             p1Hand.addAll(p1Hand);
             p2Hand.clear();
             p1Hand.addAll(warPile);
-            
+            return;
         }
          
          warPile.add(p1Hand.remove(0));
