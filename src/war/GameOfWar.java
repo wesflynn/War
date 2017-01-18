@@ -108,6 +108,10 @@ public class GameOfWar {
          Card p1Card=p1Hand.remove(0);
          Card p2Card=p2Hand.remove(0);
          
+         System.out.printf("%n%n war%n");
+         System.out.printf("player 1 %s cards in hand: %d", p1Card,p1Hand.size()+1);
+         System.out.printf("\tplayer 2 %s cards in hand: %d%n", p2Card,p2Hand.size()+1);
+         
          if (p1Card.getFaceValue()>p2Card.getFaceValue())
          {
              p1Hand.addAll(warPile);
