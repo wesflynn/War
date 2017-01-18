@@ -38,4 +38,97 @@ public class GameOfWar {
                p2Hand.add(theDeck.dealTopCard());
         }
     }
+    
+    public void playTheGame()
+    {
+        while (!p1Hand.isEmpty()&& !p2Hand.isEmpty())
+        {
+            playHand();
+        }
+        if (p1Hand.isEmpty())
+            System.out.println("player 2 is the winner!");
+        else
+            System.out.println("player 1 is the winner!");
+    }
+    /**
+     * this method draws card from hand and compares against opponents top card
+     */
+    private void playHand()
+    {
+        Card p1Card = p1Hand.remove(0);
+        Card p2Card = p1Hand.remove(0);
+        
+        if (p1Card.getFaceValue()>p2Card.getFaceValue())
+        {
+            p1Hand.add(p1Card);
+            p1Hand.add(p2Card);
+                    
+        }
+        else if ((p2Card.getFaceValue()>p1Card.getFaceValue()))
+        {
+            p2Hand.add(p1Card);
+            p2Hand.add(p2Card);
+        }
+        
+        else
+        {
+            ArrayList<Card> warPile = new ArrayList<>();
+            warPile.add(p2Card);
+            warPile.add(p1Card);
+            playWarHand(warPile);
+        }
+    }
+    
+    private void playWarHand(ArrayList<Card> warPile)
+    {
+        if (p1Hand.size()<3)
+        {
+            p2Hand.addAll(p1Hand);
+            p1Hand.clear();
+            p2Hand.addAll(warPile);
+            
+        }
+        
+         if (p2Hand.size()<3)
+        {
+            p1Hand.addAll(p1Hand);
+            p2Hand.clear();
+            p1Hand.addAll(warPile);
+            
+        }
+         
+         warPile.add(p1Hand.remove(0));
+         warPile.add(p1Hand.remove(0));
+         warPile.add(p2Hand.remove(0));
+         warPile.add(p2Hand.remove(0));
+                 
+         Card p1Card=p1Hand.remove(0);
+         Card p2Card=p2Hand.remove(0);
+         
+         if (p1Card.getFaceValue()>p2Card.getFaceValue())
+         {
+             p1Hand.addAll(warPile);
+             p1Hand.add(p1Card);
+             p1Hand.add(p2Card);
+                     
+         }
+         
+         else if (p1Card.getFaceValue()>p2Card.getFaceValue())
+         {
+             p1Hand.addAll(warPile);
+             p1Hand.add(p1Card);
+             p1Hand.add(p2Card);
+                     
+         }
+         
+         else
+         {
+             warPile.add(p2Card);
+             warPile.add(p2Card);
+             this.playWarHand(warPile);
+             
+         }
+    }
+    
+    
 }
